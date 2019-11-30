@@ -8,22 +8,20 @@ import java.util.stream.Stream;
 
 public class App {
 
-    private static final String BASE_ROOT_PATH = "src/main/resources";
-
     public static void main(String[] args) {
-        String rootPath = getRootPath(args);
-        CProgramAnalyzer analyzer = new CProgramAnalyzer();
-        try (Stream<Path> paths = Files.walk(Paths.get(rootPath))) {
-            paths.filter(path -> Files.isRegularFile(path))
-                    .filter(path -> path.toString().endsWith(".c"))
-                    .forEach(analyzer::analyze);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (args.length != 0) {
+            String rootPath = args[0];
+            CProgramAnalyzer analyzer = new CProgramAnalyzer();
+            try (Stream<Path> paths = Files.walk(Paths.get(rootPath))) {
+                paths.filter(path -> Files.isRegularFile(path))
+                        .filter(path -> path.toString().endsWith(".c"))
+                        .forEach(analyzer::analyze);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Please provide path to file or directory...");
         }
-    }
-
-    private static String getRootPath(String[] args) {
-        return (args.length != 0) ? args[0] : BASE_ROOT_PATH;
     }
 
 }
