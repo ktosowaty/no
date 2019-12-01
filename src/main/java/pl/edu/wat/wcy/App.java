@@ -17,7 +17,7 @@ public class App {
                         .filter(path -> path.toString().endsWith(".c"))
                         .forEach(analyzer::analyze);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Wrong path.");
             }
         } else {
             System.out.println("Please provide path to file or directory...");

@@ -23,7 +23,7 @@ public class CProgramAnalyzer {
             halsteadMetrics.print();
             System.out.println();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Wrong path.");
         }
     }
 
